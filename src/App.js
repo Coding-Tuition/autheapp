@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "./components/Login";
+import Register from "./components/Register";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [isNewUser, setIsNewUser] = useState(false);
+
+  function switchForm(formType) {
+    if (formType == "register") {
+      setIsNewUser(true);
+    } else {
+      setIsNewUser(false);
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Authentication</h2>
+      {isNewUser ? (
+        <Register switchForm={switchForm} />
+      ) : (
+        <Login switchForm={switchForm} />
+      )}
     </div>
   );
 }
